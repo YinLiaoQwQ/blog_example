@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>博客系统 - 博文</title>
-    <link rel="stylesheet" href="blogs_styles.css">
+    <link rel="stylesheet" href="css/blogs_styles.css">
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const MAX_LENGTH = 100; // 最大显示字符数
