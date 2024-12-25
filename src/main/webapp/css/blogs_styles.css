@@ -173,11 +173,6 @@ h1 {
     white-space: nowrap;
 }
 
-.blog-post p.expanded {
-    overflow: visible;
-    white-space: normal;
-}
-
 .blog-post .toggle {
     position: absolute;
     bottom: 20px;
@@ -231,11 +226,6 @@ h1 {
 .blog-post .actions .delete-btn:hover {
     background-color: #ef5350;
     box-shadow: 0 4px 8px rgba(239, 83, 80, 0.3);
-}
-
-.blog-post.current-user {
-    background-color: #e8f5e9;
-    border-left: 5px solid #4caf50;
 }
 
 .blog-post.current-user h2 {

@@ -126,8 +126,8 @@
 <div class="container">
     <h1>欢迎来到博客系统</h1>
     <p class="links">
-        <a href="/register.jsp">注册</a>
-        <a href="/login.jsp">登录</a>
+        <a href="register.jsp">注册</a>
+        <a href="login.jsp">登录</a>
     </p>
     <footer>
         <p>计算机2302 钱嘉炜 徐凯杰 &copy; 版权所有</p>

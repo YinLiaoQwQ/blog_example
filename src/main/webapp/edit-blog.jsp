@@ -105,14 +105,14 @@
         <% if (username != null) { %>
         欢迎您， <span><%= username %></span>!
         <% } else { %>
-        <a href="/login.jsp">登录</a> | <a href="/register.jsp">注册</a>
+        <a href="login.jsp">登录</a> | <a href="register.jsp">注册</a>
         <% } %>
     </div>
     <div class="settings">
         <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="设置" class="settings-icon">
         <div class="settings-menu">
-            <a href="/new-blog.jsp">创建新博文</a>
-            <a href="/logout">退出</a>
+            <a href="new-blog.jsp">创建新博文</a>
+            <a href="logout">退出</a>
         </div>
     </div>
 </header>
@@ -120,7 +120,7 @@
 <!-- 编辑博客内容 -->
 <div class="edit-container">
     <h1>编辑博客</h1>
-    <form class="edit-form" action="/edit-blog" method="post" accept-charset="UTF-8">
+    <form class="edit-form" action="edit-blog" method="post" accept-charset="UTF-8">
         <input type="hidden" name="id" value="<%= post.getId() %>">
 
         <div class="form-group">

@@ -149,7 +149,7 @@
     <%= request.getAttribute("errorMessage") %>
   </div>
   <% } %>
-  <form action="/login" method="post">
+  <form action="login" method="post">
     <label for="username">账号:</label>
     <input type="text" id="username" name="username" placeholder="请输入您的账号" required>
 
@@ -159,7 +159,7 @@
     <button type="submit">登录</button>
   </form>
   <div class="register-link">
-    <p>还没有账号？<a href="/register.jsp">立即注册</a></p>
+    <p>还没有账号？<a href="register.jsp">立即注册</a></p>
   </div>
 </div>
 </body>

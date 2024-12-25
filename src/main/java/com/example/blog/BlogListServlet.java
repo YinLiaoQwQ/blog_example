@@ -45,7 +45,7 @@ public class BlogListServlet extends HttpServlet {
             if (query != null && !query.trim().isEmpty()) {
                 String keyword = "%" + query.trim() + "%";
                 statement.setString(paramIndex++, keyword);
-                statement.setString(paramIndex++, keyword);
+                statement.setString(paramIndex, keyword);
             }
 
             ResultSet resultSet = statement.executeQuery();

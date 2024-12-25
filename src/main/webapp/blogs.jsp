@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.blog.BlogPost" %>
 <%@ page import="java.util.List" %>
@@ -104,14 +105,14 @@
         <% if (username != null) { %>
         欢迎您，<span><%= username %></span>!
         <% } else { %>
-        <a href="/login.jsp">登录</a> | <a href="/register.jsp">注册</a>
+        <a href="login.jsp">登录</a> | <a href="register.jsp">注册</a>
         <% } %>
     </div>
     <div class="settings">
         <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Settings">
         <div class="settings-menu">
-            <a href="/new-blog.jsp">创建新博文</a>
-            <a href="/logout">退出</a>
+            <a href="new-blog.jsp">创建新博文</a>
+            <a href="logout">退出</a>
         </div>
     </div>
 </header>
@@ -120,7 +121,7 @@
         <h1>博客列表</h1>
         <div style="display: flex; gap: 10px; align-items: center;">
             <!-- 筛选功能：眼睛图标切换 -->
-            <form method="get" action="/blogs" id="filter-form" style="display: none;">
+            <form method="get" action="blogs" id="filter-form" style="display: none;">
                 <input type="hidden" name="filter" value="<%= filter %>">
             </form>
             <img
@@ -131,7 +132,7 @@
                     data-filter="<%= filter %>"
                     title="<%= "mine".equals(filter) ? "切换到查看所有博客" : "切换到仅查看我的博客" %>">
             <!-- 搜索框 -->
-            <form method="get" action="/blogs" style="display: flex; gap: 10px; align-items: center;">
+            <form method="get" action="<c:url value="blogs"/>" style="display: flex; gap: 10px; align-items: center;">
                 <input type="hidden" name="filter" value="<%= filter %>">
                 <input
                         type="text"
@@ -162,7 +163,7 @@
         <% if (post.getUsername().equals(username)) { %>
         <div class="actions">
             <button onclick="location.href='/edit-blog?id=<%= post.getId() %>'" class="edit-btn">编辑</button>
-            <form action="/delete-blog" method="post" style="display:inline;">
+            <form action="delete-blog" method="post" style="display:inline;">
                 <input type="hidden" name="id" value="<%= post.getId() %>">
                 <button type="submit" class="delete-btn">删除</button>
             </form>

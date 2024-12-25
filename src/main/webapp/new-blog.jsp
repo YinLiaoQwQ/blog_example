@@ -126,7 +126,7 @@
 <body>
 <div class="form-container">
   <h1>创建新博客</h1>
-  <form action="/create-blog" method="post">
+  <form action="create-blog" method="post">
     <label for="title">标题:</label>
     <input type="text" id="title" name="title" placeholder="请输入博客标题" required>
 
@@ -136,7 +136,7 @@
     <button type="submit">提交</button>
   </form>
   <div class="back-link">
-    <a href="/blogs">返回博客列表</a>
+    <a href="blogs">返回博客列表</a>
   </div>
 </div>
 </body>

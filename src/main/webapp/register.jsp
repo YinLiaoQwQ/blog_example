@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,7 +134,7 @@
 <body>
 <div class="container">
   <h1>注册账号</h1>
-  <form action="/register" method="post">
+  <form action="register" method="post">
     <label for="username">用户名:</label>
     <input type="text" id="username" name="username" placeholder="请输入您的用户名" required>
 
@@ -143,7 +143,7 @@
 
     <button type="submit">注册</button>
   </form>
-  <p>已有账号？<a class="back-link" href="/login.jsp">点击登录</a></p>
+  <p>已有账号？<a class="back-link" href="login.jsp">点击登录</a></p>
 </div>
 </body>
 </html>
