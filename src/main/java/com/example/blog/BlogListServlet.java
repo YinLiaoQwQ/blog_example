@@ -19,10 +19,35 @@ public class BlogListServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         List<BlogPost> blogPosts = new ArrayList<>();
+        String filter = request.getParameter("filter") == null ? "all" : request.getParameter("filter");
+        String query = request.getParameter("query");
 
         try (Connection connection = DBUtil.getConnection()) {
-            String query = "SELECT id, title, content, username, created_at FROM posts ORDER BY created_at DESC";
-            PreparedStatement statement = connection.prepareStatement(query);
+            StringBuilder sql = new StringBuilder("SELECT id, title, content, username, created_at FROM posts WHERE 1=1");
+
+            if ("mine".equals(filter)) {
+                sql.append(" AND username = ?");
+            }
+
+            if (query != null && !query.trim().isEmpty()) {
+                sql.append(" AND (title LIKE ? OR content LIKE ?)");
+            }
+
+            sql.append(" ORDER BY created_at DESC");
+            PreparedStatement statement = connection.prepareStatement(sql.toString());
+
+            int paramIndex = 1;
+            if ("mine".equals(filter)) {
+                String username = (String) request.getSession().getAttribute("username");
+                statement.setString(paramIndex++, username);
+            }
+
+            if (query != null && !query.trim().isEmpty()) {
+                String keyword = "%" + query.trim() + "%";
+                statement.setString(paramIndex++, keyword);
+                statement.setString(paramIndex++, keyword);
+            }
+
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -41,6 +66,8 @@ public class BlogListServlet extends HttpServlet {
         }
 
         request.setAttribute("blogPosts", blogPosts);
+        request.setAttribute("filter", filter);
+        request.setAttribute("query", query);
         request.getRequestDispatcher("/blogs.jsp").forward(request, response);
     }
 }

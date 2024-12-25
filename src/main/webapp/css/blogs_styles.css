@@ -134,6 +134,12 @@ h1 {
     font-size: 1rem;
     border-radius: 5px;
     border: 1px solid #ccc;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-bar .filter-section select:hover {
+    border-color: #3f51b5;
+    box-shadow: 0 0 5px rgba(63, 81, 181, 0.3);
 }
 
 .blog-post {
@@ -179,10 +185,15 @@ h1 {
     font-size: 0.9rem;
     color: #888;
     cursor: pointer;
+    padding: 2px 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .blog-post .toggle:hover {
-    color: #333;
+    background-color: #3f51b5;
+    color: #fff;
 }
 
 .blog-post .actions {
@@ -192,30 +203,34 @@ h1 {
 }
 
 .blog-post .actions button {
-    padding: 5px 10px;
+    padding: 5px 15px;
     font-size: 0.9rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.blog-post .actions .delete-btn {
-    background-color: #e57373;
+    transition: background-color 0.3s ease, box-shadow 0.2s ease;
     color: #fff;
+    font-weight: bold;
 }
 
-.blog-post .actions .delete-btn:hover {
-    background-color: #c62828;
-}
-
+/* 编辑按钮样式 */
 .blog-post .actions .edit-btn {
     background-color: #64b5f6;
-    color: #fff;
 }
 
 .blog-post .actions .edit-btn:hover {
-    background-color: #1565c0;
+    background-color: #42a5f5;
+    box-shadow: 0 4px 8px rgba(66, 165, 245, 0.3);
+}
+
+/* 删除按钮样式 */
+.blog-post .actions .delete-btn {
+    background-color: #e57373;
+}
+
+.blog-post .actions .delete-btn:hover {
+    background-color: #ef5350;
+    box-shadow: 0 4px 8px rgba(239, 83, 80, 0.3);
 }
 
 .blog-post.current-user {
