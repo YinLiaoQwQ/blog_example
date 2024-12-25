@@ -21,12 +21,13 @@ public class BlogListServlet extends HttpServlet {
         List<BlogPost> blogPosts = new ArrayList<>();
 
         try (Connection connection = DBUtil.getConnection()) {
-            String query = "SELECT title, content, username, created_at FROM posts ORDER BY created_at DESC";
+            String query = "SELECT id, title, content, username, created_at FROM posts ORDER BY created_at DESC";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
                 BlogPost post = new BlogPost();
+                post.setId(resultSet.getInt("id"));
                 post.setTitle(resultSet.getString("title"));
                 post.setContent(resultSet.getString("content"));
                 post.setUsername(resultSet.getString("username"));

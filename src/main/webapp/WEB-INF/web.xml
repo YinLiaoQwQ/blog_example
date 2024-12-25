@@ -5,4 +5,12 @@
                              http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
     <display-name>博客系统</display-name>
+    <servlet>
+        <servlet-name>EditBlogServlet</servlet-name>
+        <servlet-class>com.example.blog.EditBlogServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditBlogServlet</servlet-name>
+        <url-pattern>/edit-blog</url-pattern>
+    </servlet-mapping>
 </web-app>

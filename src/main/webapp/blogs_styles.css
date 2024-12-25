@@ -237,15 +237,3 @@ h1 {
     font-size: 1.2em;
     margin: 50px 0;
 }
-
-.settings-menu {
-    display: none; /* 默认隐藏 */
-    position: absolute;
-    top: 100%;
-    right: 0;
-    /* 其他样式 */
-}
-
-.settings-menu.active {
-    display: block; /* 激活时显示 */
-}
