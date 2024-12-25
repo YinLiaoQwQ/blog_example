@@ -130,7 +130,7 @@
         <a href="/login.jsp">登录</a>
     </p>
     <footer>
-        <p>&copy; 计算机2302钱嘉炜 版权所有</p>
+        <p>计算机2302 钱嘉炜 徐凯杰 &copy; 版权所有</p>
     </footer>
 </div>
 </body>
