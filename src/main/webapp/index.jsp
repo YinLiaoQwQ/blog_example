@@ -31,10 +31,12 @@
             }
         }
 
-        /* 容器样式 */
+        /* 容器样式：添加 backdrop-filter 实现高斯模糊 */
         .container {
             text-align: center;
-            background: rgba(255, 255, 255, 0.95); /* 半透明背景 */
+            background: rgba(255, 255, 255, 0.3); /* 半透明背景 */
+            backdrop-filter: blur(8px); /* 高斯模糊 */
+            -webkit-backdrop-filter: blur(8px); /* 兼容 Safari */
             padding: 50px 60px;
             border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);

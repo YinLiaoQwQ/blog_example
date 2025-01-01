@@ -8,136 +8,266 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>博客系统 - 编辑</title>
-    <link rel="stylesheet" href="css/blogs_styles.css">
     <style>
-        /* 额外样式用于编辑页面 */
-        .edit-container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-        }
-
-        .edit-container h1 {
-            text-align: center;
-            margin-bottom: 30px;
+        /* 页面整体样式 */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* 动态彩色渐变背景 */
+            background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fad0c4, #ff9a9e);
+            background-size: 800% 800%;
+            animation: GradientAnimation 15s ease infinite;
             color: #333;
-        }
-
-        .edit-form {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
+        /* 动态渐变动画 */
+        @keyframes GradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .form-group label {
-            margin-bottom: 8px;
+        /* 高斯模糊效果的背景层 */
+        .background-blur {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        /* 表单容器 */
+        .form-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.4); /* 半透明背景 */
+            backdrop-filter: blur(10px);           /* 高斯模糊 */
+            -webkit-backdrop-filter: blur(10px);   /* 兼容 Safari */
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* 增加阴影 */
+            text-align: left;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #000;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 添加文字阴影 */
+        }
+
+        /* 标签样式 */
+        label {
             font-weight: bold;
-            color: #555;
+            display: block;
+            margin-bottom: 8px;
+            color: #444;
         }
 
-        .form-group input[type="text"],
-        .form-group textarea {
+        /* 输入框和编辑器样式 */
+        input[type="text"], #content {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: #f9f9f9; /* 提高输入框可读性 */
+        }
+
+        input[type="text"]:focus, #content:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 10px rgba(106, 17, 203, 0.3);
+            outline: none;
+        }
+
+        /* 富文本编辑器样式 */
+        #content {
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
             padding: 10px;
-            border: 1px solid #bbb;
-            border-radius: 4px;
-            font-size: 16px;
-            resize: vertical;
+            background-color: #fff;
         }
 
-        .form-group textarea {
-            min-height: 200px;
-        }
-
-        .form-actions {
+        /* 工具栏样式 */
+        .toolbar {
             display: flex;
-            justify-content: flex-end;
             gap: 10px;
+            margin-bottom: 10px;
         }
 
-        .form-actions button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
+        .toolbar button {
+            padding: 8px 12px;
+            font-size: 1rem;
+            background: #fff;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .form-actions .save-btn {
+        .toolbar button:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* 图标按钮 */
+        .toolbar button i {
+            pointer-events: none;
+        }
+
+        /* 按钮样式 */
+        button.save-btn {
             background-color: #28a745;
             color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
 
-        .form-actions .cancel-btn {
+        button.save-btn:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(33, 136, 56, 0.4);
+        }
+
+        button.save-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(33, 136, 56, 0.2);
+        }
+
+        button.cancel-btn {
             background-color: #dc3545;
             color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
 
-        /* 响应式设计 */
+        button.cancel-btn:hover {
+            background-color: #c82333;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+        }
+
+        button.cancel-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+        }
+
+        /* 返回链接样式 */
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #6a11cb;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+        .back-link a:hover {
+            color: #2575fc;
+            text-decoration: underline;
+        }
+
+        /* 响应式优化 */
         @media (max-width: 600px) {
-            .edit-container {
-                padding: 15px;
+            .form-container {
+                padding: 30px 20px;
             }
 
-            .form-actions {
-                flex-direction: column;
-                align-items: stretch;
+            h1 {
+                font-size: 2rem;
             }
 
-            .form-actions button {
-                width: 100%;
+            .toolbar {
+                flex-wrap: wrap;
+            }
+
+            .toolbar button {
+                flex: 1 1 45%;
             }
         }
     </style>
 </head>
 <body>
-<!-- 头部部分，与博客列表页面保持一致 -->
-<header>
-    <div class="welcome">
-        <% if (username != null) { %>
-        欢迎您， <span><%= username %></span>!
-        <% } else { %>
-        <a href="login.jsp">登录</a> | <a href="register.jsp">注册</a>
-        <% } %>
-    </div>
-    <div class="settings">
-        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="设置" class="settings-icon">
-        <div class="settings-menu">
-            <a href="new-blog.jsp">创建新博文</a>
-            <a href="logout">退出</a>
-        </div>
-    </div>
-</header>
+<!-- 高斯模糊背景层 -->
+<div class="background-blur"></div>
 
-<!-- 编辑博客内容 -->
-<div class="edit-container">
+<div class="form-container">
     <h1>编辑博客</h1>
-    <form class="edit-form" action="edit-blog" method="post" accept-charset="UTF-8">
+    <form id="editBlogForm" action="edit-blog" method="post">
+        <!-- 隐藏输入域用于传递博客ID -->
         <input type="hidden" name="id" value="<%= post.getId() %>">
 
-        <div class="form-group">
-            <label for="title">标题：</label>
-            <input type="text" id="title" name="title" value="<%= post.getTitle() %>" required>
-        </div>
+        <label for="title">标题:</label>
+        <input type="text" id="title" name="title" value="<%= post.getTitle() %>" placeholder="请输入博客标题" required>
 
-        <div class="form-group">
-            <label for="content">内容：</label>
-            <textarea id="content" name="content" required><%= post.getContent() %></textarea>
+        <label for="content">内容:</label>
+        <!-- 工具栏 -->
+        <div class="toolbar">
+            <button type="button" onclick="formatText('bold')" title="加粗"><b>B</b></button>
+            <button type="button" onclick="formatText('italic')" title="斜体"><i>I</i></button>
+            <button type="button" onclick="formatText('underline')" title="下划线"><u>U</u></button>
+            <button type="button" onclick="formatText('insertLink')" title="插入链接">🔗</button>
+            <button type="button" onclick="formatText('insertImage')" title="插入图片">🖼️</button>
         </div>
+        <!-- 富文本编辑器 -->
+        <div id="content" name="content" contenteditable="true" placeholder="写下您的博客内容..." required><%= post.getContent() %></div>
+
+        <!-- 隐藏输入域用于提交富文本内容 -->
+        <input type="hidden" id="contentInput" name="content">
 
         <div class="form-actions">
             <button type="submit" class="save-btn">保存</button>
             <button type="button" class="cancel-btn" onclick="window.history.back();">取消</button>
         </div>
     </form>
+    <div class="back-link">
+        <a href="blogs">返回博客列表</a>
+    </div>
 </div>
 
 <!-- JavaScript 处理菜单悬停 -->
@@ -167,6 +297,56 @@
             menuTimeout = setTimeout(() => {
                 settingsMenu.style.display = 'none';
             }, 1000); // 延时1秒隐藏菜单
+        });
+
+        // 富文本编辑器工具栏功能
+        function formatText(command) {
+            const contentDiv = document.getElementById('content');
+            contentDiv.focus(); // 确保编辑器获得焦点
+
+            switch(command) {
+                case 'bold':
+                    document.execCommand('bold', false, null);
+                    break;
+                case 'italic':
+                    document.execCommand('italic', false, null);
+                    break;
+                case 'underline':
+                    document.execCommand('underline', false, null);
+                    break;
+                case 'insertLink':
+                    const url = prompt("请输入链接地址:", "https://");
+                    if (url) {
+                        // 检查是否有选中的文本
+                        if (window.getSelection().toString()) {
+                            document.execCommand('createLink', false, url);
+                        } else {
+                            alert("请先选择要添加链接的文本！");
+                        }
+                    }
+                    break;
+                case 'insertImage':
+                    const imageUrl = prompt("请输入图片地址:", "https://");
+                    if (imageUrl) {
+                        document.execCommand('insertImage', false, imageUrl);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // 提交表单前将富文本内容复制到隐藏输入域
+        document.getElementById('editBlogForm').addEventListener('submit', function(e) {
+            const contentDiv = document.getElementById('content');
+            const contentInput = document.getElementById('contentInput');
+            contentInput.value = contentDiv.innerHTML;
+
+            // 简单验证内容是否为空
+            if (contentDiv.innerText.trim() === '') {
+                e.preventDefault();
+                alert('内容不能为空！');
+            }
         });
     });
 </script>
