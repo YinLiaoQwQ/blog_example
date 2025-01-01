@@ -123,6 +123,12 @@
             margin: 0 5px;
         }
 
+        header .settings-and-toggle {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
         header .settings {
             position: relative;
             cursor: pointer;
@@ -349,9 +355,6 @@
 
         /* 深色模式切换按钮 */
         .dark-mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 80px; /* 调整位置，避免与设置按钮重叠 */
             background: var(--toggle-bg);
             color: var(--toggle-color);
             border: none;
@@ -363,8 +366,8 @@
             align-items: center;
             justify-content: center;
             transition: background 0.5s ease, color 0.5s ease;
-            z-index: 4;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            flex-shrink: 0;
         }
 
         .dark-mode-toggle:hover {
@@ -390,11 +393,6 @@
             .filter-toggle {
                 width: 25px;
                 height: 25px;
-            }
-
-            .dark-mode-toggle {
-                right: 20px; /* 在小屏幕上调整位置 */
-                top: 70px; /* 避免与固定头部重叠 */
             }
         }
     </style>
@@ -515,11 +513,6 @@
     </script>
 </head>
 <body>
-<!-- 深色模式切换按钮 -->
-<button class="dark-mode-toggle" title="切换深色模式">
-    🌙
-</button>
-
 <!-- 高斯模糊背景层 -->
 <div class="background-blur"></div>
 
@@ -532,12 +525,18 @@
         <a href="login.jsp">登录</a> | <a href="register.jsp">注册</a>
         <% } %>
     </div>
-    <div class="settings">
-        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Settings">
-        <div class="settings-menu">
-            <a href="new-blog.jsp">创建新博文</a>
-            <a href="logout">退出</a>
+    <div class="settings-and-toggle">
+        <div class="settings">
+            <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Settings">
+            <div class="settings-menu">
+                <a href="new-blog.jsp">创建新博文</a>
+                <a href="logout">退出</a>
+            </div>
         </div>
+        <!-- 深色模式切换按钮 -->
+        <button class="dark-mode-toggle" title="切换深色模式">
+            🌙
+        </button>
     </div>
 </header>
 
